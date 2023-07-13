@@ -1,0 +1,466 @@
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+@Entity
+class Cliente {
+    @Id
+    
+   
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+    
+   
+private Long id;
+    
+   
+private String nome;
+
+    
+
+   
+
+
+public Cliente() {}
+
+    
+
+   
+
+
+public Cliente(String nome) {
+        
+       
+this.nome = nome;
+    }
+
+    
+    }
+
+   
+
+    }
+
+
+   
+public Long getId() {
+        
+       
+return id;
+    }
+
+    
+    }
+
+   
+
+    }
+
+
+   
+public String getNome() {
+        
+       
+return nome;
+    }
+}
+
+
+    }
+@Entity
+
+class
+class Recebivel {
+    
+   
+@Id
+    
+    @
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+   
+private String descricao;
+    
+   
+private double valor;
+    
+   
+private boolean pago;
+    
+   
+private Date dataPagamento;
+
+    
+
+    @
+
+
+   
+@ManyToOne
+    private Cliente cliente;
+
+    
+
+   
+
+
+public Recebivel() {}
+
+    
+
+   
+
+
+public Recebivel(String descricao, double valor, Cliente cliente) {
+        
+       
+this.descricao = descricao;
+        
+       
+this.valor = valor;
+        
+       
+this.cliente = cliente;
+        
+       
+this.pago = false;
+        
+       
+this.dataPagamento = null;
+    }
+
+    
+    }
+
+   
+
+    }
+
+// getters e setters omitidos para brevidade
+}
+
+public class SistemaGerenciamentoRecebiveis {
+    private static EntityManagerFactory entityManagerFactory;
+
+    public static void main(String[] args) {
+        entityManagerFactory = Persistence.createEntityManagerFactory(
+        entityManager
+"recebiveis-pu");
+
+        Cliente cliente1 = new Cliente("João");
+        
+        Cliente
+Cliente cliente2 = new Cliente("Maria");
+
+        Recebivel recebivel1 = new Recebivel("Venda de Produto A", 1000.00, cliente1);
+        Recebivel recebivel2 = new Recebivel("Venda de Serviço B", 500.00, cliente2);
+        
+        Recebivel recebivel
+
+        Recebivel receb
+
+        Recebivel
+
+       
+Recebivel recebivel3 = new Recebivel("Venda de Produto C", 750.00, cliente1);
+
+        persistirRecebivel(recebivel1);
+        persistirRecebivel(recebivel2);
+        persistirRecebivel(recebivel3);
+
+        exibirRecebiveis();
+
+        
+
+        persistirRecebivel(recebivel1);
+        persistirRecebivel(recebivel2);
+        persistirRecebivel(recebivel3);
+
+        exibirRecebiveis();
+
+       
+
+
+        persistirRecebivel(recebivel1);
+        persistirRecebivel(recebivel2);
+        persistirRecebivel(recebivel3);
+
+        exibirRecebiveis();
+
+
+
+        persistirRecebivel(recebivel1);
+        persistirRecebivel(recebivel2);
+        persistirRecebivel(recebivel3);
+
+        exibirRecebiveis
+
+
+        persistirRecebivel(recebivel1);
+        persistirRecebivel(recebivel2);
+        persistirRecebivel(recebivel3);
+
+        exibir
+
+
+        persistirRecebivel(recebivel1);
+        persistirRecebivel(recebivel2);
+        persistirRecebivel(recebivel3
+
+
+        persistirRecebivel(recebivel1);
+        persistirRecebivel(recebivel2);
+        persistirRecebivel(recebivel
+
+
+        persistirRecebivel(recebivel1);
+        persistirRecebivel(recebivel2);
+        persistirRecebivel(re
+
+
+        persistirRecebivel(recebivel1);
+        persistirRecebivel(recebivel2);
+        persistirRecebivel
+
+
+        persistirRecebivel(recebivel1);
+        persistirRecebivel(recebivel2);
+        persistirRe
+
+
+        persistirRecebivel(recebivel1);
+        persistirRecebivel(recebivel2);
+        persistir
+
+
+        persistirRecebivel(recebivel1);
+        persistirRecebivel(recebivel2);
+       
+
+
+        persistirRecebivel(recebivel1);
+        persistirRecebivel(recebivel2);
+
+
+        persistirRecebivel(recebivel1);
+        persist
+
+
+        persistirRecebivel(recebivel1);
+       
+
+
+        persistirRecebivel(recebivel1);
+
+
+        persist
+
+
+       
+
+
+double totalRecebiveis = calcularTotalRecebiveis();
+        System.out.println(
+        System.out
+
+        System
+
+       
+"Total de Recebíveis: " + totalRecebiveis);
+
+        entityManagerFactory.close();
+    }
+
+    
+
+        entityManagerFactory.close();
+    }
+
+   
+
+
+        entityManagerFactory.close();
+    }
+
+
+
+        entityManagerFactory.close();
+   
+
+
+       
+
+
+private static void persistirRecebivel(Recebivel recebivel) {
+        
+       
+EntityManager entityManager = entityManagerFactory.createEntityManager();
+        
+       
+EntityTransaction transaction = entityManager.getTransaction();
+        
+       
+try {
+            transaction.begin();
+            entityManager.persist(recebivel);
+            transaction.commit();
+        } 
+            transaction.begin();
+            entityManager.persist(recebivel);
+            transaction.commit();
+       
+
+            transaction.begin();
+            entityManager.persist(recebivel);
+            transaction.commit();
+
+            transaction.begin();
+            entityManager.persist(recebivel);
+           
+
+            transaction.begin();
+            entityManager.persist(recebivel);
+
+            transaction.begin();
+           
+
+            transaction.begin();
+
+           
+catch (Exception e) {
+            
+           
+if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } 
+                transaction.rollback();
+            }
+            e.printStackTrace();
+       
+
+                transaction.rollback();
+            }
+            e.printStackTrace();
+
+                transaction.rollback();
+            }
+           
+
+                transaction.rollback();
+            }
+
+                transaction.rollback();
+           
+
+                transaction.rollback();
+
+               
+finally {
+            entityManager.close();
+        }
+    }
+
+    
+            entityManager.close();
+        }
+    }
+
+   
+
+            entityManager.close();
+        }
+    }
+
+
+            entityManager.close();
+        }
+   
+
+            entityManager.close();
+        }
+
+            entityManager.close();
+       
+
+           
+private static void exibirRecebiveis() {
+        
+       
+EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            TypedQuery<Recebivel> query = entityManager.createQuery(
+            TypedQuery<Recebivel> query = entityManager
+
+            TypedQuery<Recebivel> query
+
+            TypedQuery<Re
+
+            TypedQuery<
+
+            TypedQuery
+
+           
+"SELECT r FROM Recebivel r", Recebivel.class);
+            List<Recebivel> recebiveis = query.getResultList();
+            System.out.println(
+            List<Recebivel> recebiveis = query.getResultList();
+            System.out.println
+
+            List<Recebivel> recebiveis = query.getResultList();
+            System.out
+
+            List<Recebivel> recebiveis = query.getResultList();
+            System
+
+            List<Recebivel> recebiveis = query.getResultList();
+
+            List<Recebivel
+
+            List<Re
+
+            List
+
+           
+"----- RECEBÍVEIS -----");
+            
+           
+for (Recebivel recebivel : recebiveis) {
+                System.out.println("Cliente: " + recebivel.getCliente().getNome());
+                System.out.println(
+               
+"Descrição: " + recebivel.getDescricao());
+                System.out.println("Valor: " + recebivel.getValor());
+                System.out.println("Pago: " + recebivel.isPago());
+                System.out.println("----------------------");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+    }
+
+    
+           
+private static double calcularTotalRecebiveis() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            TypedQuery<Double> query = entityManager.createQuery("SELECT SUM(r.valor) FROM Recebivel r", Double.class);
+            Double total = query.getSingleResult();
+            return total != null ? total : 0.0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+           
+return 0.0;
+        } finally {
+            entityManager.close();
+        }
+    }
+}
+
+            entityManager.close();
+        }
