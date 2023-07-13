@@ -1,0 +1,296 @@
+spring.rabbitmq.host=seu_host_rabbitmq
+spring.rabbitmq.port=seu_port_rabbitmq
+spring.rabbitmq.username=seu_username
+spring.rabbitmq.password=sua_senha
+
+spring.rabbitmq.port=seu_port_rabbitmq
+spring.rabbitmq.username=seu_username
+spring.rabbitmq.password=sua
+
+spring.rabbitmq.port=seu_port_rabbitmq
+spring.rabbitmq.username=seu_username
+spring.rabbitmq.password=s
+
+spring.rabbitmq.port=seu_port_rabbitmq
+spring.rabbitmq.username=seu_username
+
+spring.rabbitmq.port=seu_port_rabbitmq
+spring.rabbitmq.username=seu
+
+spring.rabbitmq.port=seu_port_rabbitmq
+spring.rabbitmq.username=se
+
+spring.rabbitmq.port=seu_port_rabbitmq
+spring.rabbitmq.username=
+
+spring.rabbitmq.port=seu_port_rabbitmq
+spring.rabbitmq.username
+
+spring.rabbitmq.port=seu_port_rabbitmq
+spring.rabbit
+
+spring.rabbitmq.port=seu_port_rabbitmq
+
+spring.rabbitmq.port=seu_port_rabbit
+
+spring.rabbitmq.port=seu_port
+
+spring.rabbitmq.port=seu
+
+spring.rabbitmq.port=
+
+spring.rabbitmq.port
+
+spring.rabbitmq
+
+spring
+
+
+
+
+
+
+
+
+
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class NotificacaoService {
+    
+   
+private static final String QUEUE_NAME = "fila_alertas";
+
+    
+
+    @
+@Autowired
+    
+   
+private AmqpTemplate amqpTemplate;
+
+    
+
+   
+
+
+public void enviarAlertaRecebimento(String email, double valor) {
+        
+        NotificacaoEmail notificacao
+
+        NotificacaoEmail
+NotificacaoEmail notificacaoEmail = new NotificacaoEmail(email, valor);
+        amqpTemplate.convertAndSend(QUEUE_NAME, notificacaoEmail);
+    }
+}
+
+        amqpTemplate.convertAndSend(QUEUE_NAME, notific
+
+        amqpTemplate.convertAndSend(
+
+        amqp
+
+
+
+
+
+
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
+@Component
+public class AlertaEmailConsumer {
+    
+   
+private static final String QUEUE_NAME = "fila_alertas";
+
+    
+
+    @
+@Autowired
+    
+   
+private JavaMailSender javaMailSender;
+
+    
+
+    @
+@Autowired
+    
+   
+private TemplateEngine templateEngine;
+
+    
+
+   
+
+
+@RabbitListener(queues = QUEUE_NAME)
+    
+   
+public void processarMensagem(NotificacaoEmail notificacaoEmail) {
+        String email = notificacaoEmail.getEmail();
+        
+       
+double valor = notificacaoEmail.getValor();
+
+        
+
+       
+
+
+// Montar o corpo do email usando um template Thymeleaf
+        
+       
+Context context = new Context();
+        context.setVariable(
+        context.setVariable
+
+       
+"email", email);
+        context.setVariable(
+        context
+
+       
+"valor", valor);
+
+        
+
+        String conteudoEmail
+
+
+       
+
+
+String conteudoEmail = templateEngine.process("email_template", context);
+
+        // Enviar o email
+        try {
+            
+            MimeMessage
+
+            Mime
+
+           
+MimeMessage message = javaMailSender.createMimeMessage();
+            
+            MimeMessageHelper helper
+
+            MimeMessage
+
+            Mime
+
+           
+MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setTo(email);
+            helper.setSubject(
+            helper.setTo(email);
+            helper.setSubject
+
+            helper.setTo(email);
+            helper.set
+
+            helper.setTo(email);
+           
+
+            helper.setTo(email
+
+           
+"Alerta de Recebimento");
+            helper.setText(conteudoEmail, 
+            helper.setText(conteudoEmail,
+
+            helper.setText(conteudoEmail
+
+           
+true);
+            javaMailSender.send(message);
+        } 
+            javaMailSender.send(message);
+        }
+
+            javaMailSender.send(message);
+       
+
+            javaMailSender.send(message);
+
+            javaMailSender.send(message
+
+            javaMailSender
+
+            javaMail
+
+            java
+
+           
+catch (MessagingException e) {
+            
+           
+// Lidar com exceções de envio de email
+            e.printStackTrace();
+        }
+    }
+}
+
+            e.printStackTrace();
+        }
+    }
+}
+``
+
+            e.printStackTrace();
+        }
+    }
+
+            e.printStackTrace();
+        }
+   
+
+            e.printStackTrace();
+        }
+
+            e.printStackTrace();
+
+            e.printStackTrace
+
+            e
+
+
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Alerta de Recebimento</title>
+
+</head
+
+</
+</head>
+<body>
+    
+    <
+<h3>Olá, <span th:text="${email}"></span>!</h3>
+    
+   
+<p>Você recebeu um pagamento no valor de R$ <span th:text="${valor}"></span>.</p>
+    
+   
+<p>Obrigado por usar nosso serviço!</p>
+
+</
+</body>
+
+</
+</html>
