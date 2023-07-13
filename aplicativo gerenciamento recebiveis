@@ -1,0 +1,226 @@
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+
+import java.time.LocalDate;
+
+public class AplicativoGerenciamentoRecebiveis extends Application {
+    private ObservableList<Recebivel> recebiveisList;
+    
+   
+private ComboBox<Cliente> clientesComboBox;
+
+    
+
+   
+
+
+public static void main(String[] args) {
+        launch(args);
+    }
+
+    
+        launch(args);
+    }
+
+   
+
+       
+@Override
+    
+   
+public void start(Stage primaryStage) {
+        primaryStage.setTitle(
+        primaryStage.setTitle
+
+        primaryStage
+
+       
+"Aplicativo de Gerenciamento de Recebíveis");
+
+        recebiveisList = FXCollections.observableArrayList();
+        ListView<Recebivel> recebiveisListView = 
+
+        recebiveisList = FXCollections.observableArrayList();
+        ListView<Recebivel> recebiveisListView
+
+
+        recebiveisList = FXCollections.observableArrayList();
+        ListView<Recebivel> recebiveis
+
+
+        recebiveisList = FXCollections.observableArrayList();
+        ListView<Recebivel> receb
+
+
+        recebiveisList = FXCollections.observableArrayList();
+        ListView<Recebivel
+
+
+        recebiveisList = FXCollections.observableArrayList();
+        ListView<Receb
+
+
+        recebiveisList = FXCollections.observableArrayList();
+        ListView<Re
+
+
+        recebiveisList = FXCollections.observableArrayList();
+        ListView
+
+
+        recebiveisList = FXCollections.observableArrayList();
+       
+
+
+        recebiveisList = FXCollections.observableArrayList();
+
+
+        receb
+
+
+        rece
+
+
+       
+
+
+new ListView<>(recebiveisList);
+
+        clientesComboBox = 
+
+       
+
+
+new ComboBox<>();
+        clientesComboBox.getItems().addAll(
+                new Cliente("João"),
+                
+               
+new Cliente("Maria"),
+                new Cliente("Pedro")
+        );
+        clientesComboBox.setPromptText(
+        );
+        clientesComboBox.set
+"Selecione um cliente");
+
+        TextField descricaoTextField = new TextField();
+        TextField valorTextField = new TextField();
+        
+       
+DatePicker dataVencimentoPicker = new DatePicker();
+
+        Button adicionarButton = new Button("Adicionar");
+        adicionarButton.setOnAction(e -> {
+            
+        adicionarButton.setOnAction(e -> {
+            Cliente
+Cliente clienteSelecionado = clientesComboBox.getValue();
+            String descricao = descricaoTextField.getText();
+            double valor = Double.parseDouble(valorTextField.getText());
+            LocalDate dataVencimento = dataVencimentoPicker.getValue();
+
+            Recebivel recebivel = new Recebivel(descricao, valor, dataVencimento, clienteSelecionado);
+            recebiveisList.add(recebivel);
+            descricaoTextField.clear();
+            valorTextField.clear();
+            dataVencimentoPicker.setValue(
+            recebiveisList
+null);
+        });
+
+        
+        });
+
+       
+VBox vbox = new VBox(10);
+        vbox.setPadding(new Insets(10));
+        vbox.getChildren().addAll(recebiveisListView, clientesComboBox, descricaoTextField,
+                valorTextField, dataVencimentoPicker, adicionarButton);
+
+        primaryStage.setScene(
+        vbox.getChildren().addAll(receb
+new Scene(vbox, 300, 400));
+        primaryStage.show();
+    }
+
+    
+        primaryStage.show();
+   
+private class Cliente {
+        private String nome;
+
+        public Cliente(String nome) {
+            this.nome = nome;
+        }
+
+        
+        }
+
+public String getNome() {
+            return nome;
+        }
+
+        @Override
+        public String toString() {
+            return nome;
+        }
+    }
+
+    
+        }
+   
+private class Recebivel {
+        private String descricao;
+        
+       
+private double valor;
+        private LocalDate dataVencimento;
+        private Cliente cliente;
+
+        public Recebivel(String descricao, double valor, LocalDate dataVencimento, Cliente cliente) {
+            this.descricao = descricao;
+            this.valor = valor;
+            this.dataVencimento = dataVencimento;
+            this.cliente = cliente;
+        }
+
+        public String getDescricao() {
+            return descricao;
+        }
+
+        public double getValor() {
+            return valor;
+        }
+
+        
+       
+public LocalDate getDataVencimento() {
+            return dataVencimento;
+        }
+
+        
+        }
+
+       
+public Cliente getCliente() {
+            return cliente;
+        }
+
+        @Override
+        
+       
+public String toString() {
+            return descricao + " - R$" + valor + " - " + cliente.getNome();
+        }
+    }
+}
+
+        }
+    }
